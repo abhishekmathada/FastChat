@@ -541,12 +541,34 @@ register_conv_template(
     )
 )
 
+# # MPT-30b-chat default template
+# register_conv_template(
+#     Conversation(
+#         name="mpt-30b-chat",
+#         system="""<|im_start|>system
+# A conversation between a user and an LLM-based AI assistant. The assistant gives helpful and honest answers.""",
+#         roles=("<|im_start|>user", "<|im_start|>assistant"),
+#         messages=(),
+#         offset=0,
+#         sep_style=SeparatorStyle.CHATML,
+#         sep="<|im_end|>",
+#         stop_token_ids=[50278, 0],
+#     )
+# )
+
 # MPT-30b-chat default template
 register_conv_template(
     Conversation(
         name="mpt-30b-chat",
         system="""<|im_start|>system
-A conversation between a user and an LLM-based AI assistant. The assistant gives helpful and honest answers.""",
+A conversation between a user who wants to book a ticket and an LLM-based AI assistant. The assistant takes all information required for ticket booking.
+Do not answer any query which is out of context.
+In order to book a ticket you need following information,
+- source location
+- destination location
+- date of travel
+
+When user asks for booking a ticket. You should ask for above information only if it is not already provided. Once you get all the above information, you have to strictly say "TICKET IS BOOKED".""",
         roles=("<|im_start|>user", "<|im_start|>assistant"),
         messages=(),
         offset=0,
